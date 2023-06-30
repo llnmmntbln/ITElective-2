@@ -344,7 +344,18 @@
                 margin-left: 0;
             }
         }
-
+        .box {
+  width: 350px;
+  height: 100%;
+  max-height: 600px;
+  min-height: 450px;
+  background: #332F63;
+  border-radius: 20px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 30px 50px;
         @media screen and (max-width: 730px) {
 
             body {
@@ -435,10 +446,12 @@
     </header>
     <section class="home flex-center" id="home">
         <div class="home-container">
+            <div class="box">
             <div class="media-icons">
                 <h1>4<span><i class="fa-solid fa-gear fa-spin-pulse"></i></span>4</h1>
                 <h2>Error: 404 page not found</h2>
                 <p>Oops, the page you're looking for cannot be accessed or doesn't exist.</p>
+            </div>
             </div>
         </div>
     </section>
