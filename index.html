@@ -12,6 +12,7 @@
     <link rel="icon" type="x-icon" href="https://raw.githubusercontent.com/llnmmntbln/Activity/main/a%20(3).png">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 
@@ -1202,91 +1203,17 @@
             </div>
         </div>
     </section>
-    <section class="skills section" id="skills">
+<section class="skills section" id="skills">
         <div class="container flex-center">
             <h1 class="section-title_1">Skills</h1>
             <h2 class="section-title_2">Skills</h2>
         </div>
         <div class="education">
             <div class="hard-skills">
-                <h3><label>Hard Skills</label></h3>
-                <ul class="bars">
-                    <li class="bar">
-                        <div class="info">
-                            <span>Graphic Design</span>
-                            <span>80%</span>
-                        </div>
-                        <div class="line graphic"></div>
-                    </li>
-                    <li class="bar">
-                        <div class="info">
-                            <span>Database Management</span>
-                            <span>70%</span>
-                        </div>
-                        <div class="line database"></div>
-                    </li>
-                    <li class="bar">
-                        <div class="info">
-                            <span>Foreign Languages</span>
-                            <span>95%</span>
-                        </div>
-                        <div class="line foreign"></div>
-                    </li>
-                    <li class="bar">
-                        <div class="info">
-                            <span>Video Editing</span>
-                            <span>75%</span>
-                        </div>
-                        <div class="line video"></div>
-                    </li>
-                    <li class="bar">
-                        <div class="info">
-                            <span>Machine Operation</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="line machine"></div>
-                    </li>
-                </ul>
+                <canvas id="hardSkillsChart" width="400" height="400"></canvas>
             </div>
             <div class="soft-skills">
-                <h3><label>Soft Skills</label></h3>
-                <ul class="bars">
-                    <li class="bar">
-                        <div class="info">
-                            <span>Adaptability</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="line adaptability"></div>
-                    </li>
-                    <li class="bar">
-                        <div class="info">
-                            <span>Communication Skills</span>
-                            <span>70%</span>
-                        </div>
-                        <div class="line communication"></div>
-                    </li>
-                    <li class="bar">
-                        <div class="info">
-                            <span>Optimism</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="line optimism"></div>
-                    </li>
-                    <li class="bar">
-                        <div class="info">
-                            <span>Leadership</span>
-                            <span>75%</span>
-                        </div>
-                        <div class="line leadership"></div>
-                    </li>
-                    <li class="bar">
-                        <div class="info">
-                            <span>Time Management</span>
-                            <span>80%</span>
-                        </div>
-                        <div class="line time"></div>
-                    </li>
-                </ul>
+                <canvas id="softSkillsChart" width="400" height="400"></canvas>
             </div>
         </div>
     </section>
@@ -1477,6 +1404,45 @@
 
 
     <script>
+        function createPieChart(canvasId, labels, data) {
+            var ctx = document.getElementById(canvasId).getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: "Skill Level",
+                        data: data,
+                        backgroundColor: [
+                            "#292929",
+                            "#444444b0",
+                            "#9c9c9c61",
+                            "#bacdd1",
+                            "#d1cca9"
+                        ],
+                        hoverOffset: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: {
+                        animateRotate: true,
+                        animateScale: true
+                    }
+                }
+            });
+        }
+
+        var hardSkillsLabels = ["Graphic design", "Database Management", "Foreign Languages", "Video editing", "Machine Operation"];
+        var hardSkillsData = [80, 70, 95, 80, 90];
+
+        createPieChart('hardSkillsChart', hardSkillsLabels, hardSkillsData);
+
+        var softSkillsLabels = ["Adaptability", "Communication Skills", "Optimistic", "Leadership", "Time Management"];
+        var softSkillsData = [95, 80, 90, 80, 95];
+
+        createPieChart('softSkillsChart', softSkillsLabels, softSkillsData);
         const hobbiesModals = document.querySelectorAll(".hobbies-model");
         const imgCards = document.querySelectorAll(".img-card");
         const hobbiesCloseBtns = document.querySelectorAll(".hobbies-close-btn");
