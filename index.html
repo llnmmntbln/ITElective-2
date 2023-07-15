@@ -920,7 +920,22 @@
             display: flex;
             justify-content: center;
         }
+        
+        .chart-container {
+            display: flex;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            margin-bottom: 10%;
+        }
 
+
+        .chart-container canvas {
+            flex: 1 1 auto;
+            max-width: 400px;
+            height: auto;
+            margin: 10px;
+        }
         @media screen and (max-width: 1070px) {
 
             .navigation {
@@ -1030,7 +1045,18 @@
                 margin-left: 0;
             }
         }
+        
+        @media screen and (max-width: 900px) {
+            .chart-container {
+                flex-direction: column;
+                align-items: center;
+            }
 
+            .chart-container canvas {
+                margin: 10px auto;
+            }
+        }
+        
         @media screen and (max-width: 730px) {
 
             body {
@@ -1208,13 +1234,9 @@
             <h1 class="section-title_1">Skills</h1>
             <h2 class="section-title_2">Skills</h2>
         </div>
-        <div class="education">
-            <div class="hard-skills">
-                <canvas id="hardSkillsChart" width="400" height="400"></canvas>
-            </div>
-            <div class="soft-skills">
-                <canvas id="softSkillsChart" width="400" height="400"></canvas>
-            </div>
+        <div class="chart-container">
+            <canvas id="hardSkillsChart"></canvas>
+            <canvas id="softSkillsChart"></canvas>
         </div>
     </section>
     <section class="hobbies section" id="hobbies">
@@ -1404,7 +1426,7 @@
 
 
     <script>
-        function createPieChart(canvasId, labels, data) {
+        function createAnimatedPieChart(canvasId, labels, data) {
             var ctx = document.getElementById(canvasId).getContext('2d');
             var chart = new Chart(ctx, {
                 type: 'pie',
@@ -1414,18 +1436,17 @@
                         label: "Skill Level",
                         data: data,
                         backgroundColor: [
-                            "#292929",
+                            "rgb(51 56 59)",
                             "#444444b0",
                             "#9c9c9c61",
-                            "#bacdd1",
-                            "#d1cca9"
+                            "#fff",
+                            "#1fb9b0bd"
                         ],
                         hoverOffset: 6
                     }]
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false,
                     animation: {
                         animateRotate: true,
                         animateScale: true
@@ -1437,12 +1458,13 @@
         var hardSkillsLabels = ["Graphic design", "Database Management", "Foreign Languages", "Video editing", "Machine Operation"];
         var hardSkillsData = [80, 70, 95, 80, 90];
 
-        createPieChart('hardSkillsChart', hardSkillsLabels, hardSkillsData);
+        createAnimatedPieChart('hardSkillsChart', hardSkillsLabels, hardSkillsData);
 
         var softSkillsLabels = ["Adaptability", "Communication Skills", "Optimistic", "Leadership", "Time Management"];
         var softSkillsData = [95, 80, 90, 80, 95];
 
-        createPieChart('softSkillsChart', softSkillsLabels, softSkillsData);
+        createAnimatedPieChart('softSkillsChart', softSkillsLabels, softSkillsData);
+
         const hobbiesModals = document.querySelectorAll(".hobbies-model");
         const imgCards = document.querySelectorAll(".img-card");
         const hobbiesCloseBtns = document.querySelectorAll(".hobbies-close-btn");
